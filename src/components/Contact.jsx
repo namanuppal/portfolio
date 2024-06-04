@@ -1,28 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link
 
-export default function App() {
+export default function Contact() {
+
     const submitHandle = () => {
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const tel = document.getElementById("tel").value;
+        const name = encodeURIComponent(document.getElementById('name').value);
+        const email = encodeURIComponent(document.getElementById('email').value);
+        const tel = encodeURIComponent(document.getElementById('tel').value);
+      
+        const mailtoLink = `mailto:namanuppal678@gmail.com?cc=${email}&subject=${name}&body=${tel}`;
 
-        var mailtoLink =
-            "mailto:namanuppal678@gmail.com" +
-            "?cc=" +
-            encodeURIComponent(email) +
-            "&subject=" +
-            encodeURIComponent(name) +
-            "&body=" +
-            encodeURIComponent(tel);
-
-        // Use Link to navigate to the email link
-        // Note: Make sure you have set up routing in your React application
-        // for this to work correctly
-        // Refer to the react-router-dom documentation for detailed instructions
-        // on setting up routing: https://replit.com/@replit/React-TypeScript
-        <Link to={mailtoLink} />;
-    };
+      
+        window.location.href = mailtoLink;
+      }
+      
     return (
         <div className="relative flex items-top justify-center min-h-[700px] bg-white sm:items-center sm:pt-0">
             <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
@@ -30,7 +20,7 @@ export default function App() {
                     <div className="grid grid-cols-1 md:grid-cols-2">
                         <div className="p-6 mr-2 bg-gray-100 sm:rounded-lg">
                             <h1 className="text-3xl sm:text-4xl text-gray-800 font-extrabold tracking-tight">
-                                Get in touch:
+                                Get in touch: 
                             </h1>
                             <p className="text-normal text-lg sm:text-xl font-medium text-gray-600 mt-2">
                                 Fill in the form to start a conversation
@@ -82,7 +72,7 @@ export default function App() {
                                     />
                                 </svg>
                                 <div className="ml-4 text-md tracking-wide font-semibold w-40">
-                                    <a href="tel:+91 7060831883"> Click ME</a>
+                                   <a href="tel:+91 7060831883"> Click ME</a>
                                 </div>
                             </div>
 
