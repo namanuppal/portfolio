@@ -29,6 +29,12 @@ export default function Footer() {
                                         About
                                     </Link>
                                 </li>
+                                <li className="md:hidden md:mt-10">
+                                    <Link to="/project" 
+                                        className={({isActive}) => `${isActive ? "bg-orange-700" : "bg-gray-700"}` }>
+                                        Project
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                         <div>
