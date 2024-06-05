@@ -7,7 +7,7 @@ export default function Home() {
 
   useEffect(() => {
     const options = {
-      strings: ["Frontend Web Devloper."],
+      strings: ["Frontend Web Developer."],
       typeSpeed: 50,
       loop: false
     };
