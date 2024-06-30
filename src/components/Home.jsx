@@ -29,15 +29,6 @@ export default function Home() {
               Download Resume
             </h2>
           </a>
-          
-            <Link
-              className="inline-flex text-white items-center px-6 py-3 font-medium bg-orange-700 rounded-lg hover:opacity-75"
-              to="/"
-            >
-              <a href="">
-                &nbsp; Download now &nbsp;
-              </a>
-            </Link>
           </div>
         </div>
 
