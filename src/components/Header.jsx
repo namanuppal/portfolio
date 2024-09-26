@@ -1,72 +1,68 @@
-import React from "react";
-import {Link, NavLink} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FaHome, FaProjectDiagram, FaUser, FaEnvelope } from "react-icons/fa";
 
-export default function Header() {
-    return (
-        <header className="shadow sticky z-50 top-0">
-            <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
-                <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                    <Link to="/" className="flex items-center">
-                    <h1 className="mr-3 h-12 text-3xl">Nam<span className="text-red-700">an.</span></h1>
-                    </Link>
-                    <div className="flex items-center lg:order-2">
-                        <Link
-                            to="/contact"
-                            className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-                        >
-                            Get started
-                        </Link>
-                    </div>
-                    <div
-                        className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
-                        id="mobile-menu-2"
-                    >
-                        <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-                            <li>
-                                <NavLink
-                                to='/'
-                                    className={({isActive}) =>
-                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
-                                    }
-                                >
-                                    Home
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                to='/about'
-                                    className={({isActive}) =>
-                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
-                                    }
-                                >
-                                    About
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                to='/project'
-                                    className={({isActive}) =>
-                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
-                                    }
-                                >
-                                    Projects
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                to='/contact'
-                                    className={({isActive}) =>
-                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-orange-700" : "text-gray-700"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
-                                    }
-                                >
-                                    Contact
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
-    );
-}
+const Header = () => {
+  const [activeTab, setActiveTab] = useState("home");
+  const [isMobile, setIsMobile] = useState(false);
+  const location = useLocation();
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const path = location.pathname === "/" ? "home" : location.pathname.slice(1);
+    setActiveTab(path);
+  }, [location]);
+
+  const tabs = [
+    { id: "home", label: "Home", icon: FaHome, path: "/" },
+    { id: "project", label: "Projects", icon: FaProjectDiagram, path: "/project" },
+    { id: "about", label: "About", icon: FaUser, path: "/about" },
+    { id: "contact", label: "Contact", icon: FaEnvelope, path: "/contact" },
+  ];
+
+  const handleTabClick = (tabId, path) => {
+    setActiveTab(tabId);
+    window.location.pathname = path; // Programmatic navigation
+  };
+
+  return (
+    <header className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg sticky top-0 z-50">
+      <nav className="container mx-auto px-4 py-3">
+        <div className="flex items-center justify-between">
+          <Link to="/" className="text-3xl font-bold">
+            Nam<span className="text-red-700">an.</span>
+          </Link>
+          <div className="flex items-center">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => handleTabClick(tab.id, tab.path)}
+                className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-600 focus:ring-white ${
+                  activeTab === tab.id
+                    ? "bg-white text-purple-600"
+                    : "hover:bg-purple-500"
+                }`}
+                aria-current={activeTab === tab.id ? "page" : undefined}
+                role="tab"
+                aria-label={tab.label}
+              >
+                <tab.icon className={`${isMobile ? "text-xl" : "text-lg"}`} />
+                {!isMobile && <span>{tab.label}</span>}
+              </button>
+            ))}
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
+};
+
+export default Header;
