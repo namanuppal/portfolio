@@ -1,78 +1,85 @@
-import React, { useState } from 'react';
+import React from "react";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
-function Project({ title, description, features, projectLink, codeLink }) {
-  const [showProject, setShowProject] = useState(false);
-
-  const toggleProject = () => {
-    setShowProject(!showProject);
-  };
-
+const ProjectCard = ({ title, description, features, projectLink, codeLink, image }) => {
   return (
-    <div className="max-w-lg w-full rounded overflow-hidden shadow-lg bg-white mx-4 mb-8">
-      <div className="px-6 py-4">
-        <div>
-          <div className="font-bold text-xl mb-2">{title}</div>
-          <p className="text-gray-700 text-base">{description}</p>
-          <h3 className="font-bold text-lg mt-4">Features</h3>
-          <ul className="list-disc list-inside text-gray-700">
-            {features.map((feature, index) => (
-              <li key={index}>{feature}</li>
-            ))}
-          </ul>
+    <div className="bg-gray-200 rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 focus-within:ring-2 focus-within:ring-blue-400">
+      <img src={image} alt={`${title} project thumbnail`} className="w-full h-48 object-cover" />
+      <div className="p-6">
+        <h3 className="text-xl font-semibold mb-2 text-black">{title}</h3>
+        <p className="text-gray-800 mb-4">{description}</p>
+        <h4 className="font-bold text-lg mt-4 text-black">Features</h4>
+        <ul className="list-disc list-inside text-gray-800 mb-4">
+          {features.map((feature, index) => (
+            <li key={index}>{feature}</li>
+          ))}
+        </ul>
+        <div className="flex justify-between">
+          <a
+            href={codeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-blue-600 hover:text-blue-800 focus:outline-none focus:underline"
+          >
+            <FaGithub className="mr-2" />
+            Code
+          </a>
+          <a
+            href={projectLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-green-600 hover:text-green-800 focus:outline-none focus:underline"
+          >
+            <FaExternalLinkAlt className="mr-2" />
+            Live Demo
+          </a>
         </div>
-        <button
-          onClick={toggleProject}
-          className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-10 rounded transition duration-300 ease-in-out"
-        >
-          {showProject ? "Hide Project" : "Use Here ?"}
-        </button>
-      </div>
-      <div className={`px-6 py-4 ${showProject ? 'block' : 'hidden'}`}>
-        <iframe src={projectLink} className="w-full h-64 rounded-lg overflow-hidden" title={title}></iframe>
-      </div>
-      <div className="px-6 py-4 text-center">
-        <a href={projectLink} className={`text-blue-500 hover:underline`}>View Project</a>
-        <a href={codeLink} className={`text-blue-500 hover:underline ml-4`}>Code</a>
       </div>
     </div>
   );
-}
+};
 
-function Projects() {
+
+
+const Projects = () => {
   const projects = [
     {
-      title: "Project 1: Weather App",
-      description: "This project is a simple Weather App built using HTML, CSS, and JavaScript. It allows users to check the weather of any city by entering its name in the input field.",
+      title: "Weather App",
+      description: "This project is a simple Weather App that allows users to check the weather of any city.",
       features: [
-        "Users can enter the name of a city in the input field to get its weather information.",
-        "The app displays the city name, country, weather description, temperature in Celsius, and humidity.",
-        "Weather icons change based on the current weather conditions.",
-        "Responsive design: The app is optimized for various screen sizes."
+        "Enter city name to get weather information.",
+        "Displays weather description, temperature, and humidity.",
+        "Responsive design optimized for various screen sizes."
       ],
       projectLink: "https://know-weather-status.netlify.app/",
-      codeLink: "https://github.com/namanuppal/Basic-Weather-App"
+      codeLink: "https://github.com/namanuppal/Basic-Weather-App",
+      image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     },
     {
-      title: "Project 2: CRUD To-Do List App",
-      description: "This is a simple To-Do List application built using React. It allows users to add, edit, complete, and delete tasks.",
+      title: "CRUD To-Do List App",
+      description: "A simple To-Do List application built with React that allows task management.",
       features: [
-        "Add new tasks",
-        "Mark task as complete",
-        "Edit existing tasks",
-        "Delete tasks"
+        "Add new tasks.",
+        "Mark tasks as complete.",
+        "Edit and delete tasks."
       ],
       projectLink: "https://add-todolist-here.netlify.app/",
-      codeLink: "https://github.com/namanuppal/Add-To-DO"
+      codeLink: "https://github.com/namanuppal/Add-To-DO",
+      image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     }
   ];
 
   return (
-    <div className='container mx-auto mt-10 flex overflow-x-auto justify-evenly'>
-      {projects.map((project, index) => (
-        <Project key={index} {...project} />
-      ))}
+    <div className="bg-gradient-to-r from-purple-600 to-indigo-600 min-h-screen flex flex-col justify-center">
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <ProjectCard key={index} {...project} />
+          ))}
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default Projects;
