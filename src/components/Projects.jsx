@@ -1,10 +1,21 @@
 import React from "react";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
-const ProjectCard = ({ title, description, features, projectLink, codeLink, image }) => {
+const ProjectCard = ({
+  title,
+  description,
+  features,
+  projectLink,
+  codeLink,
+  image,
+}) => {
   return (
     <div className="bg-gray-200 rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 focus-within:ring-2 focus-within:ring-blue-400">
-      <img src={image} alt={`${title} project thumbnail`} className="w-full h-48 object-cover" />
+      <img
+        src={image}
+        alt={`${title} project thumbnail`}
+        className="w-full h-48 object-cover"
+      />
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2 text-black">{title}</h3>
         <p className="text-gray-800 mb-4">{description}</p>
@@ -39,34 +50,51 @@ const ProjectCard = ({ title, description, features, projectLink, codeLink, imag
   );
 };
 
-
-
 const Projects = () => {
   const projects = [
     {
+      title: "EatCrave - Food Delivery App",
+      description:
+        "This project is a full-stack food delivery web application designed for restaurant owners and customers. The app allows users to browse restaurants, view menus, and order food. It is built with a modern tech stack and deployed on Vercel.",
+      features: [
+        "🛍️ Order Food: Browse restaurants and menus, add items to the cart, and place orders.",
+        "📱 Responsive Design: Fully responsive across desktop and mobile devices.",
+        "💬 Real-time Updates: Uses WebSockets for live order status updates.",
+        "🛠️ Admin Dashboard: Restaurant owners can manage their menus and orders.",
+      ],
+      projectLink: "https://eatcrave.vercel.app/",
+      codeLink: "https://github.com/namanuppal/eatcrave",
+      image:
+        "https://images.unsplash.com/photo-1574071318508-1cdbab80d002",
+    },
+    {
       title: "Weather App",
-      description: "This project is a simple Weather App that allows users to check the weather of any city.",
+      description:
+        "This project is a simple Weather App that allows users to check the weather of any city.",
       features: [
         "Enter city name to get weather information.",
         "Displays weather description, temperature, and humidity.",
-        "Responsive design optimized for various screen sizes."
+        "Responsive design optimized for various screen sizes.",
       ],
       projectLink: "https://know-weather-status.netlify.app/",
       codeLink: "https://github.com/namanuppal/Basic-Weather-App",
-      image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+      image:
+        "https://images.unsplash.com/photo-1592210454359-9043f067919b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     },
     {
       title: "CRUD To-Do List App",
-      description: "A simple To-Do List application built with React that allows task management.",
+      description:
+        "A simple To-Do List application built with React that allows task management.",
       features: [
         "Add new tasks.",
         "Mark tasks as complete.",
-        "Edit and delete tasks."
+        "Edit and delete tasks.",
       ],
       projectLink: "https://add-todolist-here.netlify.app/",
       codeLink: "https://github.com/namanuppal/Add-To-DO",
-      image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-    }
+      image:
+        "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    },
   ];
 
   return (
