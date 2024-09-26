@@ -57,10 +57,10 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Footer Bottom Section */}
+        {/* Footer Bottom Section     */}
         <div className="mt-8 pt-8 border-t border-purple-500 text-lg">
           <p className="text-center">
-            &copy; {new Date().getFullYear()} Naman Uppal. All rights reserved.
+            &copy; {new Date().getFullYear()}  Naman Uppal. All rights reserved.
           </p>
         </div>
       </div>
