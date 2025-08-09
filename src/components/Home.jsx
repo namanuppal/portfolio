@@ -69,7 +69,7 @@ const Home = () => {
                 </div>
               </section>
               <a
-                href="NAMAN UPPAL.pdf"
+                href="Naman Uppal Resume.pdf"
                 download
                 className="inline-block mt-10 bg-orange-500 text-white font-bold py-4 px-8 rounded-full shadow-lg hover:bg-orange-600 transition duration-300"
               >
